@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="7.6.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="7.6.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <description align="left" color="orange" colored="true" height="306" resized="true" width="557" x="10" y="265">ETL Basics&lt;br&gt;&lt;br&gt;1. Retrieve the Customer Churn Data&lt;br&gt;2. Filter out all the rows of data where the Age is &amp;lt;15 or &amp;gt;99&lt;br&gt;3. Map the German gender values &amp;#8211; weiblich &amp;amp; m&amp;#228;nlich to female &amp;amp; male&lt;br&gt;4. Replace missing Gender values with the mode&lt;br&gt;5. Convert the LastTransactionDate into week numbers with respect to its year&lt;br&gt;6. Convert the PostalCode attribute from a Numeric to Polynominal&lt;br&gt;7. Generate the &amp;quot;Churn&amp;quot; attribute and designate all Customers with missing ChurnDate as &amp;#8220;Loyal&amp;#8221; and the ones with ChurnDate as &amp;#8220;Churn&amp;#8221; -- if(missing(ChurnDate), &amp;quot;Loyal&amp;quot;, &amp;quot;Churn&amp;quot;)&lt;br&gt;Generate a new PostalCode attribute that will overwrite the old one. Compute this by extracting only the first character. -- prefix(PostalCode, 1)&lt;br&gt;8. Set Role for the Churn attribute to be a &amp;quot;label&amp;quot;&lt;br&gt;9. Select/Choose the attributes for modeling and select all except ChurnDate, HashCode, and rowNumber.&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;</description>
+    </process>
+  </operator>
+</process>
