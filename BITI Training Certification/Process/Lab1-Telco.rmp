@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="9.0.002">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="9.0.002" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="read_excel" compatibility="9.0.002" expanded="true" height="68" name="Read Excel" width="90" x="45" y="34">
+        <parameter key="excel_file" value="C:\Users\user\Desktop\B031810136\rapid-miner-ds\mis\Day 1\Lab1LoadData\Telco Data.xlsx"/>
+        <parameter key="sheet_selection" value="sheet number"/>
+        <parameter key="sheet_number" value="1"/>
+        <parameter key="imported_cell_range" value="A1"/>
+        <parameter key="encoding" value="SYSTEM"/>
+        <parameter key="first_row_as_names" value="true"/>
+        <list key="annotations"/>
+        <parameter key="date_format" value="MMM d, yyyy h:mm:ss a z"/>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="read_all_values_as_polynominal" value="false"/>
+        <list key="data_set_meta_data_information">
+          <parameter key="0" value="Churn Status.true.polynominal.attribute"/>
+          <parameter key="1" value="Hashcode.true.polynominal.attribute"/>
+          <parameter key="2" value="Gender.true.polynominal.attribute"/>
+          <parameter key="3" value="Region.true.polynominal.attribute"/>
+          <parameter key="4" value="Weeks in Contract.true.real.attribute"/>
+          <parameter key="5" value="Day Mins.true.real.attribute"/>
+          <parameter key="6" value="Intl Mins.true.real.attribute"/>
+          <parameter key="7" value="Night Mins.true.real.attribute"/>
+          <parameter key="8" value="Day Calls.true.integer.attribute"/>
+          <parameter key="9" value="Intl Calls.true.integer.attribute"/>
+          <parameter key="10" value="Night Calls.true.integer.attribute"/>
+          <parameter key="11" value="Total Charges.true.real.attribute"/>
+          <parameter key="12" value="Day Charge.true.real.attribute"/>
+          <parameter key="13" value="Intl Charge.true.real.attribute"/>
+          <parameter key="14" value="Night Charge.true.real.attribute"/>
+          <parameter key="15" value="Campaign.true.polynominal.attribute"/>
+          <parameter key="16" value="Login_Dt.true.date_time.attribute"/>
+          <parameter key="17" value="Customer ID.true.polynominal.attribute"/>
+        </list>
+        <parameter key="read_not_matching_values_as_missings" value="false"/>
+        <parameter key="datamanagement" value="double_array"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="9.0.002" expanded="true" height="68" name="Store" width="90" x="45" y="136">
+        <parameter key="repository_entry" value="//BITI Training Certification/Data/Telco-Data"/>
+      </operator>
+      <operator activated="true" class="replace_missing_values" compatibility="9.0.002" expanded="true" height="103" name="Replace Missing Values" width="90" x="45" y="238">
+        <parameter key="return_preprocessing_model" value="false"/>
+        <parameter key="create_view" value="false"/>
+        <parameter key="attribute_filter_type" value="single"/>
+        <parameter key="attribute" value="Gender"/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default" value="average"/>
+        <list key="columns"/>
+      </operator>
+      <connect from_op="Read Excel" from_port="output" to_op="Store" to_port="input"/>
+      <connect from_op="Store" from_port="through" to_op="Replace Missing Values" to_port="example set input"/>
+      <connect from_op="Replace Missing Values" from_port="example set output" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>

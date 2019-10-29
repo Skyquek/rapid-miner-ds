@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="8.0.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="8.0.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <description align="left" color="orange" colored="true" height="182" resized="true" width="572" x="21" y="210">Telco Data ETL&lt;br&gt;&lt;br&gt;1. Eliminate &amp;#8216;Hashcode&amp;#8217;, &amp;#8216;Campaign&amp;#8217;, and &amp;#8216;Login_dt&amp;#8217; columns from the result set&lt;br&gt;2. Eliminate the rows of data where the &amp;#8216;Gender' is missing&lt;br/&gt;3. Eliminate the rows of data where 'Region' is missing&lt;br&gt;4. Replace the missing values of the &amp;#8216;Weeks in Contract&amp;#8217; column with the average value&lt;br&gt;5. Designate &amp;#8216;Customer-id&amp;#8217; as the Id column and &amp;#8216;Churn Status' as the Label column&lt;br&gt;&lt;br&gt;&lt;br&gt;</description>
+    </process>
+  </operator>
+</process>

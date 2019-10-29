@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="8.0.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="8.0.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <description align="left" color="orange" colored="true" height="142" resized="true" width="430" x="16" y="237">Loading Telco Data&lt;br&gt;&lt;br&gt;1. Locate the Data subfolder inside the course materials folder&lt;br&gt;2. Load Telco Data Excel file located in the Data subfolder&lt;br&gt;3. Read Telco Data using Read Excel&lt;br&gt;4. Store it in the repository in the Labs/Data Solution folder&lt;br&gt;</description>
+    </process>
+  </operator>
+</process>
