@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="8.0.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="8.0.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <description align="left" color="orange" colored="true" height="228" resized="false" width="428" x="10" y="242">Optimizing Parameters&lt;br&gt;&lt;br&gt;1. Copy the operators from the Normalizing Solution process&lt;br&gt;2. Add the Optimize Parameter (Grid) operator&lt;br&gt;3. Move the Cross Validation Operator as a Sub Process&lt;br&gt;4. Back in the Optimize Parameter, choose k-NN-&amp;gt;K&lt;br&gt;5. Set the Grid range from 1 &amp;#8211; 30 and the # of Steps to 30&lt;br&gt;6. In this Sub-process add the Log operator after cross validation&lt;br&gt;7. Log the k-NN k Parameter and the Cross Validation Accuracy Value&lt;br&gt;8. Review the results&lt;br&gt;&lt;br&gt;&lt;br&gt;</description>
+    </process>
+  </operator>
+</process>

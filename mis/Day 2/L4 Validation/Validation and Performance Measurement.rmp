@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="7.6.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="7.6.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <description align="left" color="orange" colored="true" height="201" resized="true" width="416" x="10" y="221">Validation &amp;amp; Performance Measurement&lt;br&gt;&lt;br&gt;1. Retrieve the ETL Process and Embed that here&lt;br&gt;2. Multiply the data&lt;br&gt;3. Perform Split-Validation on one output (with k-NN). Apply Model and evaluate the Performance&lt;br&gt;4. Perform Cross Validation on the other output (with k-NN). Apply Model and evaluate the Performance&lt;br&gt;5. Alter the k values on both the models and evaluate again&lt;br&gt;6. Review results&lt;br&gt;&lt;br&gt;&lt;br&gt;</description>
+    </process>
+  </operator>
+</process>
