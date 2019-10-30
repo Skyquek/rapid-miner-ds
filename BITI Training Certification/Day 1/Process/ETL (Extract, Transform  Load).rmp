@@ -12,10 +12,10 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="9.0.002" expanded="true" height="68" name="Retrieve Lab1Customer Data" width="90" x="45" y="85">
+      <operator activated="true" class="retrieve" compatibility="9.0.002" expanded="true" height="68" name="Retrieve Lab1Customer Data" width="90" x="45" y="34">
         <parameter key="repository_entry" value="../Data/Lab1Customer Data"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="9.0.002" expanded="true" height="103" name="Filter Examples" width="90" x="179" y="238">
+      <operator activated="true" class="filter_examples" compatibility="9.0.002" expanded="true" height="103" name="Filter Examples" width="90" x="45" y="136">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -27,7 +27,7 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="map" compatibility="9.0.002" expanded="true" height="82" name="Map" width="90" x="313" y="85">
+      <operator activated="true" class="map" compatibility="9.0.002" expanded="true" height="82" name="Map" width="90" x="45" y="289">
         <parameter key="attribute_filter_type" value="subset"/>
         <parameter key="attribute" value=""/>
         <parameter key="attributes" value="Gender"/>
@@ -47,7 +47,7 @@
         <parameter key="consider_regular_expressions" value="false"/>
         <parameter key="add_default_mapping" value="false"/>
       </operator>
-      <operator activated="true" class="replace_missing_values" compatibility="9.0.002" expanded="true" height="103" name="Replace Missing Values" width="90" x="447" y="238">
+      <operator activated="true" class="replace_missing_values" compatibility="9.0.002" expanded="true" height="103" name="Replace Missing Values" width="90" x="179" y="34">
         <parameter key="return_preprocessing_model" value="false"/>
         <parameter key="create_view" value="false"/>
         <parameter key="attribute_filter_type" value="single"/>
@@ -65,7 +65,7 @@
         <parameter key="default" value="average"/>
         <list key="columns"/>
       </operator>
-      <operator activated="true" class="date_to_numerical" compatibility="9.0.002" expanded="true" height="82" name="Date to Numerical" width="90" x="581" y="85">
+      <operator activated="true" class="date_to_numerical" compatibility="9.0.002" expanded="true" height="82" name="Date to Numerical" width="90" x="179" y="289">
         <parameter key="attribute_name" value="LastTransaction"/>
         <parameter key="time_unit" value="week"/>
         <parameter key="millisecond_relative_to" value="second"/>
@@ -80,7 +80,7 @@
         <parameter key="year_relative_to" value="era"/>
         <parameter key="keep_old_attribute" value="false"/>
       </operator>
-      <operator activated="true" class="numerical_to_polynominal" compatibility="9.0.002" expanded="true" height="82" name="Numerical to Polynominal" width="90" x="715" y="238">
+      <operator activated="true" class="numerical_to_polynominal" compatibility="9.0.002" expanded="true" height="82" name="Numerical to Polynominal" width="90" x="313" y="34">
         <parameter key="attribute_filter_type" value="single"/>
         <parameter key="attribute" value="PostalCode"/>
         <parameter key="attributes" value=""/>
@@ -94,19 +94,19 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="generate_attributes" compatibility="9.0.002" expanded="true" height="82" name="Generate Attributes" width="90" x="849" y="85">
+      <operator activated="true" class="generate_attributes" compatibility="9.0.002" expanded="true" height="82" name="Generate Attributes" width="90" x="447" y="34">
         <list key="function_descriptions">
           <parameter key="Churn" value="if(missing(ChurnDate),&quot;Loyal&quot;,&quot;Churn&quot;)"/>
           <parameter key="PostalCode" value="prefix(PostalCode, 1)"/>
         </list>
         <parameter key="keep_all" value="true"/>
       </operator>
-      <operator activated="true" class="set_role" compatibility="9.0.002" expanded="true" height="82" name="Set Role" width="90" x="983" y="238">
+      <operator activated="true" class="set_role" compatibility="9.0.002" expanded="true" height="82" name="Set Role" width="90" x="581" y="34">
         <parameter key="attribute_name" value="Churn"/>
         <parameter key="target_role" value="label"/>
         <list key="set_additional_roles"/>
       </operator>
-      <operator activated="true" class="select_attributes" compatibility="9.0.002" expanded="true" height="82" name="Select Attributes" width="90" x="1117" y="85">
+      <operator activated="true" class="select_attributes" compatibility="9.0.002" expanded="true" height="82" name="Select Attributes" width="90" x="782" y="34">
         <parameter key="attribute_filter_type" value="subset"/>
         <parameter key="attribute" value=""/>
         <parameter key="attributes" value="PostalCode|Payment Method|Churn|Age|LastTransaction|Gender"/>

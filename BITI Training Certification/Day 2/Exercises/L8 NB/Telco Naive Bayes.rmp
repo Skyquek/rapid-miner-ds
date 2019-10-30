@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="8.0.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="8.0.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <description align="left" color="orange" colored="true" height="110" resized="true" width="461" x="18" y="217">Telco Naive Bayes&lt;br&gt;&lt;br&gt;1. Copy the Telco Linear Regression operators and paste them in&lt;br/&gt;2. Remove Set Role, Normalize, and Group Models operators&lt;br&gt;2. Replace k-NN with &amp;#8216;Naive Bayes&amp;#8217;&lt;br&gt;3. Review the Results&lt;br&gt;</description>
+    </process>
+  </operator>
+</process>

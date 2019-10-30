@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="8.0.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="8.0.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <description align="left" color="orange" colored="true" height="243" resized="true" width="595" x="20" y="223">Telco Optimize Parameter&lt;br&gt;&lt;br&gt;1. Add the Telco ETL process&lt;br&gt;2. Introduce an Optimize Parameter operator and move the Cross Validation operator as a sub-process inside the Optimize operator&lt;br&gt;3. Optimize the k-value parameter, Min-1, Max-30 &amp;amp; Steps-30 (linear)&lt;br&gt;4. Add the Log operator to capture the results (performance and k-value)&lt;br&gt;5. Run the optimization and review the results&lt;br&gt;&lt;br&gt;</description>
+    </process>
+  </operator>
+</process>

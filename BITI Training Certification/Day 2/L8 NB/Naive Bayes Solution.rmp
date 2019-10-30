@@ -12,7 +12,7 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="subprocess" compatibility="9.0.002" expanded="true" height="103" name="Subprocess" width="90" x="45" y="34">
+      <operator activated="true" class="subprocess" compatibility="9.0.002" expanded="true" height="103" name="Subprocess" width="90" x="112" y="34">
         <process expanded="true">
           <operator activated="true" class="productivity:execute_process" compatibility="9.0.002" expanded="true" height="68" name="Execute ETL (Extract, Transform  Load)" width="90" x="45" y="85">
             <parameter key="process_location" value="../../Day 1/Process/ETL (Extract, Transform  Load)"/>
@@ -23,7 +23,8 @@
             <list key="macros"/>
             <parameter key="fail_for_unknown_macros" value="true"/>
           </operator>
-          <operator activated="true" class="concurrency:cross_validation" compatibility="9.0.002" expanded="true" height="145" name="Cross Validation" width="90" x="246" y="85">
+          <operator activated="true" class="multiply" compatibility="9.0.002" expanded="true" height="82" name="Multiply" width="90" x="179" y="85"/>
+          <operator activated="true" class="concurrency:cross_validation" compatibility="9.0.002" expanded="true" height="145" name="Cross Validation" width="90" x="380" y="85">
             <parameter key="split_on_batch_attribute" value="false"/>
             <parameter key="leave_one_out" value="false"/>
             <parameter key="number_of_folds" value="10"/>
@@ -52,29 +53,14 @@
                 <parameter key="max" value="1.0"/>
                 <parameter key="allow_negative_values" value="false"/>
               </operator>
-              <operator activated="true" class="k_nn" compatibility="9.0.002" expanded="true" height="82" name="k-NN (2)" width="90" x="179" y="187">
-                <parameter key="k" value="5"/>
-                <parameter key="weighted_vote" value="true"/>
-                <parameter key="measure_types" value="MixedMeasures"/>
-                <parameter key="mixed_measure" value="MixedEuclideanDistance"/>
-                <parameter key="nominal_measure" value="NominalDistance"/>
-                <parameter key="numerical_measure" value="EuclideanDistance"/>
-                <parameter key="divergence" value="GeneralizedIDivergence"/>
-                <parameter key="kernel_type" value="radial"/>
-                <parameter key="kernel_gamma" value="1.0"/>
-                <parameter key="kernel_sigma1" value="1.0"/>
-                <parameter key="kernel_sigma2" value="0.0"/>
-                <parameter key="kernel_sigma3" value="2.0"/>
-                <parameter key="kernel_degree" value="3.0"/>
-                <parameter key="kernel_shift" value="1.0"/>
-                <parameter key="kernel_a" value="1.0"/>
-                <parameter key="kernel_b" value="0.0"/>
+              <operator activated="true" class="naive_bayes" compatibility="9.0.002" expanded="true" height="82" name="Naive Bayes" width="90" x="179" y="187">
+                <parameter key="laplace_correction" value="true"/>
               </operator>
               <operator activated="true" class="group_models" compatibility="9.0.002" expanded="true" height="103" name="Group Models" width="90" x="313" y="34"/>
               <connect from_port="training set" to_op="Normalize" to_port="example set input"/>
-              <connect from_op="Normalize" from_port="example set output" to_op="k-NN (2)" to_port="training set"/>
+              <connect from_op="Normalize" from_port="example set output" to_op="Naive Bayes" to_port="training set"/>
               <connect from_op="Normalize" from_port="preprocessing model" to_op="Group Models" to_port="models in 1"/>
-              <connect from_op="k-NN (2)" from_port="model" to_op="Group Models" to_port="models in 2"/>
+              <connect from_op="Naive Bayes" from_port="model" to_op="Group Models" to_port="models in 2"/>
               <connect from_op="Group Models" from_port="model out" to_port="model"/>
               <portSpacing port="source_training set" spacing="0"/>
               <portSpacing port="sink_model" spacing="0"/>
@@ -125,7 +111,8 @@
               <portSpacing port="sink_performance 2" spacing="0"/>
             </process>
           </operator>
-          <connect from_op="Execute ETL (Extract, Transform  Load)" from_port="result 1" to_op="Cross Validation" to_port="example set"/>
+          <connect from_op="Execute ETL (Extract, Transform  Load)" from_port="result 1" to_op="Multiply" to_port="input"/>
+          <connect from_op="Multiply" from_port="output 1" to_op="Cross Validation" to_port="example set"/>
           <connect from_op="Cross Validation" from_port="example set" to_port="out 1"/>
           <connect from_op="Cross Validation" from_port="performance 1" to_port="out 2"/>
           <portSpacing port="source_in 1" spacing="0"/>
@@ -134,11 +121,11 @@
           <portSpacing port="sink_out 3" spacing="0"/>
         </process>
       </operator>
-      <connect from_op="Subprocess" from_port="out 1" to_port="result 1"/>
+      <connect from_op="Subprocess" from_port="out 2" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
-      <description align="left" color="orange" colored="true" height="228" resized="false" width="428" x="10" y="242">Optimizing Parameters&lt;br&gt;&lt;br&gt;1. Copy the operators from the Normalizing Solution process&lt;br&gt;2. Add the Optimize Parameter (Grid) operator&lt;br&gt;3. Move the Cross Validation Operator as a Sub Process&lt;br&gt;4. Back in the Optimize Parameter, choose k-NN-&amp;gt;K&lt;br&gt;5. Set the Grid range from 1 &amp;#8211; 30 and the # of Steps to 30&lt;br&gt;6. In this Sub-process add the Log operator after cross validation&lt;br&gt;7. Log the k-NN k Parameter and the Cross Validation Accuracy Value&lt;br&gt;8. Review the results&lt;br&gt;&lt;br&gt;&lt;br&gt;</description>
+      <description align="left" color="orange" colored="true" height="191" resized="true" width="268" x="38" y="222">Naive Bayes&lt;br&gt;&lt;br&gt;1. Copy the Normalizing Solution process operators and paste here&lt;br&gt;2. In the Cross Validation sub-process, remove Normalize, k-NN, and Group Models, replace with Na&amp;#239;ve Bayes&lt;br&gt;3. Review the Results&lt;br&gt;&lt;br&gt;</description>
     </process>
   </operator>
 </process>

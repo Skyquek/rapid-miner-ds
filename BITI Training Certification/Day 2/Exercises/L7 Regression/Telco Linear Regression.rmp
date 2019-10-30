@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="8.0.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="8.0.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <description align="left" color="orange" colored="true" height="256" resized="true" width="576" x="18" y="214">Telco Linear Regression&lt;br&gt;&lt;br&gt;1. Add the Telco ETL process.&lt;br&gt;2. Use Set Role to change the &amp;quot;Total Charges&amp;quot; to the label.&lt;br&gt;3. Remove the attributes &amp;quot;Day Charges&amp;quot; and &amp;quot;Night Charges&amp;quot; and &amp;quot;Intl Charges&amp;quot; from the dataset with Select Attributes.&lt;br&gt;4. Convert the nominal attributes to numerical using Nominal to Numerical.&lt;br&gt;5. Insert the building block &amp;quot;Numerical Cross Validation.&amp;quot;&lt;br&gt;6. Change the learner to &amp;quot;Linear Regression&amp;quot; and set the feature selection criterion to t-test with alpha = 0.05.&lt;br&gt;7. Run the model and review the results.</description>
+    </process>
+  </operator>
+</process>

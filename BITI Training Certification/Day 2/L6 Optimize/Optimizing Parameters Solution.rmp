@@ -12,18 +12,26 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="subprocess" compatibility="9.0.002" expanded="true" height="103" name="Subprocess" width="90" x="45" y="34">
+      <operator activated="true" class="productivity:execute_process" compatibility="9.0.002" expanded="true" height="68" name="Execute ETL (Extract, Transform  Load)" width="90" x="45" y="34">
+        <parameter key="process_location" value="../../Day 1/Process/ETL (Extract, Transform  Load)"/>
+        <parameter key="use_input" value="true"/>
+        <parameter key="store_output" value="false"/>
+        <parameter key="propagate_metadata_recursively" value="true"/>
+        <parameter key="cache_process" value="true"/>
+        <list key="macros"/>
+        <parameter key="fail_for_unknown_macros" value="true"/>
+      </operator>
+      <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="9.0.002" expanded="true" height="124" name="Optimize Parameters (Grid)" width="90" x="179" y="34">
+        <list key="parameters">
+          <parameter key="k-NN (3).k" value="[1.0;30.0;30;linear]"/>
+        </list>
+        <parameter key="error_handling" value="fail on error"/>
+        <parameter key="log_performance" value="true"/>
+        <parameter key="log_all_criteria" value="false"/>
+        <parameter key="synchronize" value="false"/>
+        <parameter key="enable_parallel_execution" value="true"/>
         <process expanded="true">
-          <operator activated="true" class="productivity:execute_process" compatibility="9.0.002" expanded="true" height="68" name="Execute ETL (Extract, Transform  Load)" width="90" x="45" y="85">
-            <parameter key="process_location" value="../../Day 1/Process/ETL (Extract, Transform  Load)"/>
-            <parameter key="use_input" value="true"/>
-            <parameter key="store_output" value="false"/>
-            <parameter key="propagate_metadata_recursively" value="true"/>
-            <parameter key="cache_process" value="true"/>
-            <list key="macros"/>
-            <parameter key="fail_for_unknown_macros" value="true"/>
-          </operator>
-          <operator activated="true" class="concurrency:cross_validation" compatibility="9.0.002" expanded="true" height="145" name="Cross Validation" width="90" x="246" y="85">
+          <operator activated="true" class="concurrency:cross_validation" compatibility="9.0.002" expanded="true" height="145" name="Cross Validation (2)" width="90" x="246" y="34">
             <parameter key="split_on_batch_attribute" value="false"/>
             <parameter key="leave_one_out" value="false"/>
             <parameter key="number_of_folds" value="10"/>
@@ -32,7 +40,7 @@
             <parameter key="local_random_seed" value="1992"/>
             <parameter key="enable_parallel_execution" value="true"/>
             <process expanded="true">
-              <operator activated="true" class="normalize" compatibility="9.0.002" expanded="true" height="103" name="Normalize" width="90" x="45" y="34">
+              <operator activated="true" class="normalize" compatibility="9.0.002" expanded="true" height="103" name="Normalize (2)" width="90" x="45" y="34">
                 <parameter key="return_preprocessing_model" value="false"/>
                 <parameter key="create_view" value="false"/>
                 <parameter key="attribute_filter_type" value="all"/>
@@ -52,7 +60,7 @@
                 <parameter key="max" value="1.0"/>
                 <parameter key="allow_negative_values" value="false"/>
               </operator>
-              <operator activated="true" class="k_nn" compatibility="9.0.002" expanded="true" height="82" name="k-NN (2)" width="90" x="179" y="187">
+              <operator activated="true" class="k_nn" compatibility="9.0.002" expanded="true" height="82" name="k-NN (3)" width="90" x="179" y="187">
                 <parameter key="k" value="5"/>
                 <parameter key="weighted_vote" value="true"/>
                 <parameter key="measure_types" value="MixedMeasures"/>
@@ -70,22 +78,22 @@
                 <parameter key="kernel_a" value="1.0"/>
                 <parameter key="kernel_b" value="0.0"/>
               </operator>
-              <operator activated="true" class="group_models" compatibility="9.0.002" expanded="true" height="103" name="Group Models" width="90" x="313" y="34"/>
-              <connect from_port="training set" to_op="Normalize" to_port="example set input"/>
-              <connect from_op="Normalize" from_port="example set output" to_op="k-NN (2)" to_port="training set"/>
-              <connect from_op="Normalize" from_port="preprocessing model" to_op="Group Models" to_port="models in 1"/>
-              <connect from_op="k-NN (2)" from_port="model" to_op="Group Models" to_port="models in 2"/>
-              <connect from_op="Group Models" from_port="model out" to_port="model"/>
+              <operator activated="true" class="group_models" compatibility="9.0.002" expanded="true" height="103" name="Group Models (2)" width="90" x="313" y="34"/>
+              <connect from_port="training set" to_op="Normalize (2)" to_port="example set input"/>
+              <connect from_op="Normalize (2)" from_port="example set output" to_op="k-NN (3)" to_port="training set"/>
+              <connect from_op="Normalize (2)" from_port="preprocessing model" to_op="Group Models (2)" to_port="models in 1"/>
+              <connect from_op="k-NN (3)" from_port="model" to_op="Group Models (2)" to_port="models in 2"/>
+              <connect from_op="Group Models (2)" from_port="model out" to_port="model"/>
               <portSpacing port="source_training set" spacing="0"/>
               <portSpacing port="sink_model" spacing="0"/>
               <portSpacing port="sink_through 1" spacing="0"/>
             </process>
             <process expanded="true">
-              <operator activated="true" class="apply_model" compatibility="9.0.002" expanded="true" height="82" name="Apply Model (2)" width="90" x="45" y="34">
+              <operator activated="true" class="apply_model" compatibility="9.0.002" expanded="true" height="82" name="Apply Model (3)" width="90" x="45" y="34">
                 <list key="application_parameters"/>
                 <parameter key="create_view" value="false"/>
               </operator>
-              <operator activated="true" class="performance_classification" compatibility="9.0.002" expanded="true" height="82" name="Performance Cross Validation" width="90" x="179" y="34">
+              <operator activated="true" class="performance_classification" compatibility="9.0.002" expanded="true" height="82" name="Performance Cross Validation (2)" width="90" x="179" y="34">
                 <parameter key="main_criterion" value="first"/>
                 <parameter key="accuracy" value="true"/>
                 <parameter key="classification_error" value="false"/>
@@ -112,11 +120,11 @@
                 <parameter key="use_example_weights" value="true"/>
                 <list key="class_weights"/>
               </operator>
-              <connect from_port="model" to_op="Apply Model (2)" to_port="model"/>
-              <connect from_port="test set" to_op="Apply Model (2)" to_port="unlabelled data"/>
-              <connect from_op="Apply Model (2)" from_port="labelled data" to_op="Performance Cross Validation" to_port="labelled data"/>
-              <connect from_op="Performance Cross Validation" from_port="performance" to_port="performance 1"/>
-              <connect from_op="Performance Cross Validation" from_port="example set" to_port="test set results"/>
+              <connect from_port="model" to_op="Apply Model (3)" to_port="model"/>
+              <connect from_port="test set" to_op="Apply Model (3)" to_port="unlabelled data"/>
+              <connect from_op="Apply Model (3)" from_port="labelled data" to_op="Performance Cross Validation (2)" to_port="labelled data"/>
+              <connect from_op="Performance Cross Validation (2)" from_port="performance" to_port="performance 1"/>
+              <connect from_op="Performance Cross Validation (2)" from_port="example set" to_port="test set results"/>
               <portSpacing port="source_model" spacing="0"/>
               <portSpacing port="source_test set" spacing="0"/>
               <portSpacing port="source_through 1" spacing="0"/>
@@ -125,16 +133,29 @@
               <portSpacing port="sink_performance 2" spacing="0"/>
             </process>
           </operator>
-          <connect from_op="Execute ETL (Extract, Transform  Load)" from_port="result 1" to_op="Cross Validation" to_port="example set"/>
-          <connect from_op="Cross Validation" from_port="example set" to_port="out 1"/>
-          <connect from_op="Cross Validation" from_port="performance 1" to_port="out 2"/>
-          <portSpacing port="source_in 1" spacing="0"/>
-          <portSpacing port="sink_out 1" spacing="0"/>
-          <portSpacing port="sink_out 2" spacing="0"/>
-          <portSpacing port="sink_out 3" spacing="0"/>
+          <operator activated="true" class="log" compatibility="9.0.002" expanded="true" height="103" name="Log" width="90" x="447" y="34">
+            <list key="log">
+              <parameter key="cross validation" value="operator.Cross Validation (2).value.performance 1"/>
+              <parameter key="K-value" value="operator.k-NN (3).parameter.k"/>
+            </list>
+            <parameter key="sorting_type" value="none"/>
+            <parameter key="sorting_k" value="100"/>
+            <parameter key="persistent" value="false"/>
+          </operator>
+          <connect from_port="input 1" to_op="Cross Validation (2)" to_port="example set"/>
+          <connect from_op="Cross Validation (2)" from_port="model" to_op="Log" to_port="through 1"/>
+          <connect from_op="Cross Validation (2)" from_port="performance 1" to_op="Log" to_port="through 2"/>
+          <connect from_op="Log" from_port="through 1" to_port="model"/>
+          <connect from_op="Log" from_port="through 2" to_port="performance"/>
+          <portSpacing port="source_input 1" spacing="0"/>
+          <portSpacing port="source_input 2" spacing="0"/>
+          <portSpacing port="sink_performance" spacing="0"/>
+          <portSpacing port="sink_model" spacing="0"/>
+          <portSpacing port="sink_output 1" spacing="0"/>
         </process>
       </operator>
-      <connect from_op="Subprocess" from_port="out 1" to_port="result 1"/>
+      <connect from_op="Execute ETL (Extract, Transform  Load)" from_port="result 1" to_op="Optimize Parameters (Grid)" to_port="input 1"/>
+      <connect from_op="Optimize Parameters (Grid)" from_port="performance" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
