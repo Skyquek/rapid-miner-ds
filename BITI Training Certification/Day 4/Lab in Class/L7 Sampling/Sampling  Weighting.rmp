@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="8.0.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="8.0.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <description align="left" color="orange" colored="true" height="256" resized="true" width="555" x="10" y="198">Demo &amp;#8211; Sampling and Weighting&lt;br&gt;&lt;br&gt;1. Copy Model Storing &amp;amp; Performance Measurement solution operators but delete the Store operator&lt;br&gt;2. Introduce Sample operator and experiment with both absolute and relative sampling&lt;br&gt;3. Set the sample size using Extract Macro&lt;br&gt;4. Move sampling into the Training side of Cross Validation before DT model&lt;br&gt;5. Apply Model &amp;amp; Evaluate Performance&lt;br&gt;6. Save that solution and then make a copy of this process&lt;br&gt;7. Remove the Sample operator from Cross Validation sub-process&lt;br&gt;8. Introduce &amp;#8216;Generate Weight&amp;#8217; operator before Cross Validation in the main process&lt;br&gt;9. Set the &amp;#8216;total weight&amp;#8217; to example count using Extract Macro&lt;br&gt;10. Apply Model &amp;amp; Evaluate Performance</description>
+    </process>
+  </operator>
+</process>

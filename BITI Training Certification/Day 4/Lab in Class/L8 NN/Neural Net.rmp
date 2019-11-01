@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="8.0.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="8.0.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <description align="left" color="orange" colored="true" height="210" resized="false" width="408" x="10" y="203">Demo &amp;#8211; Neural Net&lt;br&gt;&lt;br&gt;1. Copy weighting solution process operators&lt;br&gt;2. Remove extract macro and generate weight operators&lt;br&gt;3. Convert all the Nominal values/columns to Numerical&lt;br&gt;4. Inside the Cross Validation sub-process, replace Decision Tree with the Neural Net learner operator&lt;br&gt;4. Create 3 hidden layers (1, 2, 3) with values of 14, 10, and 6&lt;br&gt;5. Apply the Model and Test Performance&lt;br&gt;&lt;br&gt;&lt;br&gt;</description>
+    </process>
+  </operator>
+</process>

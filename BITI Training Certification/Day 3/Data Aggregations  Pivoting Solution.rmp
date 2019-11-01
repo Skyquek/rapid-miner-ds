@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="8.0.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="8.0.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="productivity:execute_process" compatibility="8.0.001" expanded="true" height="68" name="Execute Data Join &amp; Data Cleansing Solution" width="90" x="581" y="340">
+        <parameter key="process_location" value="../L2 Join &amp; Cleansing/Data Join &amp; Data Cleansing Solution"/>
+        <parameter key="use_input" value="true"/>
+        <parameter key="store_output" value="false"/>
+        <parameter key="propagate_metadata_recursively" value="true"/>
+        <parameter key="cache_process" value="true"/>
+        <list key="macros"/>
+        <parameter key="fail_for_unknown_macros" value="true"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="8.0.001" expanded="true" height="68" name="Retrieve Transaction Data.xlsx" width="90" x="45" y="34">
+        <parameter key="repository_entry" value="../Data Solutions/Transaction Data.xlsx"/>
+      </operator>
+      <operator activated="true" class="multiply" compatibility="8.0.001" expanded="true" height="103" name="Multiply" width="90" x="112" y="136"/>
+      <operator activated="true" class="aggregate" compatibility="7.4.000" expanded="true" height="82" name="Count Payment Methods" width="90" x="246" y="238">
+        <parameter key="use_default_aggregation" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default_aggregation_function" value="average"/>
+        <list key="aggregation_attributes">
+          <parameter key="PaymentMethod" value="count"/>
+        </list>
+        <parameter key="group_by_attributes" value="CustomerId|PaymentMethod"/>
+        <parameter key="count_all_combinations" value="false"/>
+        <parameter key="only_distinct" value="false"/>
+        <parameter key="ignore_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="pivot" compatibility="8.0.001" expanded="true" height="82" name="Pivot" width="90" x="380" y="238">
+        <parameter key="group_attribute" value="CustomerId"/>
+        <parameter key="index_attribute" value="PaymentMethod"/>
+        <parameter key="consider_weights" value="true"/>
+        <parameter key="weight_aggregation" value="sum"/>
+        <parameter key="skip_constant_attributes" value="true"/>
+        <parameter key="datamanagement" value="double_array"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="aggregate" compatibility="7.4.000" expanded="true" height="82" name="Aggregate TransactionValue and Date" width="90" x="246" y="34">
+        <parameter key="use_default_aggregation" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default_aggregation_function" value="average"/>
+        <list key="aggregation_attributes">
+          <parameter key="TransactionValue" value="average"/>
+          <parameter key="TransactionValue" value="sum"/>
+          <parameter key="Date" value="maximum"/>
+        </list>
+        <parameter key="group_by_attributes" value="|CustomerId"/>
+        <parameter key="count_all_combinations" value="false"/>
+        <parameter key="only_distinct" value="false"/>
+        <parameter key="ignore_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="rename" compatibility="8.0.001" expanded="true" height="82" name="Rename Aggregated Columns" width="90" x="380" y="85">
+        <parameter key="old_name" value="average(TransactionValue)"/>
+        <parameter key="new_name" value="AverageTransactionValue"/>
+        <list key="rename_additional_attributes">
+          <parameter key="maximum(Date)" value="MostRecentTransactionDate"/>
+          <parameter key="sum(TransactionValue)" value="TotalTransactionValue"/>
+        </list>
+      </operator>
+      <operator activated="true" class="replace_missing_values" compatibility="8.0.001" expanded="true" height="103" name="Replace Missing Values" width="90" x="514" y="187">
+        <parameter key="return_preprocessing_model" value="false"/>
+        <parameter key="create_view" value="false"/>
+        <parameter key="attribute_filter_type" value="regular_expression"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value="Count Payment Method_credit card|Count Payment Method_cheque|Count Payment Method_cash"/>
+        <parameter key="regular_expression" value="count.+"/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default" value="zero"/>
+        <list key="columns"/>
+      </operator>
+      <operator activated="true" class="join" compatibility="8.0.001" expanded="true" height="82" name="Inner Join Aggregations with Pivoted Data" width="90" x="648" y="136">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="CustomerId" value="CustomerId"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="join" compatibility="8.0.001" expanded="true" height="82" name="Join" width="90" x="782" y="238">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="CustomerId" value="CustomerId"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <connect from_op="Execute Data Join &amp; Data Cleansing Solution" from_port="result 1" to_op="Join" to_port="right"/>
+      <connect from_op="Retrieve Transaction Data.xlsx" from_port="output" to_op="Multiply" to_port="input"/>
+      <connect from_op="Multiply" from_port="output 1" to_op="Aggregate TransactionValue and Date" to_port="example set input"/>
+      <connect from_op="Multiply" from_port="output 2" to_op="Count Payment Methods" to_port="example set input"/>
+      <connect from_op="Count Payment Methods" from_port="example set output" to_op="Pivot" to_port="example set input"/>
+      <connect from_op="Pivot" from_port="example set output" to_op="Replace Missing Values" to_port="example set input"/>
+      <connect from_op="Aggregate TransactionValue and Date" from_port="example set output" to_op="Rename Aggregated Columns" to_port="example set input"/>
+      <connect from_op="Rename Aggregated Columns" from_port="example set output" to_op="Inner Join Aggregations with Pivoted Data" to_port="left"/>
+      <connect from_op="Replace Missing Values" from_port="example set output" to_op="Inner Join Aggregations with Pivoted Data" to_port="right"/>
+      <connect from_op="Inner Join Aggregations with Pivoted Data" from_port="join" to_op="Join" to_port="left"/>
+      <connect from_op="Join" from_port="join" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="168"/>
+      <portSpacing port="sink_result 2" spacing="21"/>
+      <description align="left" color="orange" colored="true" height="354" resized="false" width="467" x="18" y="343">Demo - Aggregations &amp;amp; Pivoting&lt;br&gt;&lt;br&gt;1. Retrieve Transaction data&lt;br&gt;2. Perform Aggregation to calculate &amp;#8211; Average &amp;amp; Sum of TransactionValue and Maximum Date&lt;br&gt;3. Rename the aggregated columns to: AverageTransactionValue, TotalTransactionValue, and MostRecentTransactionDate&lt;br&gt;4. Multiply the original dataset&lt;br&gt;5. Perform Aggregation on the second copy in order to Count each PaymentMethod for each CustomerId&lt;br&gt;6. Pivot this result to create new columns for each Count of PaymentMethod&lt;br&gt;7. Replace the missing values in Pivoted columns with zero&lt;br&gt;8. Join these two data sets together&lt;br&gt;9. Embed the Data Join &amp;amp; Data Cleansing Solution process&lt;br&gt;10. Inner join the Aggregated &amp;amp; Pivoted result data with Lesson 2 process result&lt;br&gt;11. Run and test&lt;br&gt;&lt;br&gt;&lt;br&gt;</description>
+    </process>
+  </operator>
+</process>

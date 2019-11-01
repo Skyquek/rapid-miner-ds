@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="8.0.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="8.0.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <description align="left" color="orange" colored="true" height="219" resized="true" width="483" x="10" y="177">Demo &amp;#8211; Feature Selection&lt;br&gt;&lt;br&gt;1. Copy the Neural Net Solution operators&lt;br&gt;2. Before the Cross-Validation sub-process, add Remove Correlated Attributes operator and show results&lt;br&gt;3. Add the Forward Selection operator to the Training side of Cross-Validation&lt;br&gt;4. Inside that Forward Selection sub-process, introduce another Cross Validation with Na&amp;#239;ve Bayes learner&lt;br&gt;5. Feed that example set output to the existing Neural Net learner&lt;br&gt;6. Apply the Model and Test Performance, and save this process as Forward Selection solution&lt;br&gt;&lt;br&gt;</description>
+    </process>
+  </operator>
+</process>

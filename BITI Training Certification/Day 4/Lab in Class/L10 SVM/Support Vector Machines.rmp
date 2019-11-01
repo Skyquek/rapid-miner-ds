@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="8.0.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="8.0.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <description align="left" color="orange" colored="true" height="321" resized="false" width="495" x="11" y="128">Demo &amp;#8211; SVM&lt;br&gt;&lt;br&gt;1. Copy the Neural Net Solution operators&lt;br&gt;2. In the Cross Validation sub-process, replace the Neural Net with SVM learner&lt;br&gt;3. Add Extract Macro and Generate Weight operators from the Weighting Solution&lt;br&gt;4. Save as SVM Solution and make a copy of this process&lt;br&gt;5. In the Testing section of the Cross-Validation operator, introduce &amp;#8216;Create Threshold&amp;#8217; and &amp;#8216;Apply Threshold&amp;#8217; before the Performance operator&lt;br&gt;6. Change the performance main criterion to accuracy&lt;br&gt;7. Introduce an &amp;#8216;Optimize Parameters&amp;#8217; operator at the top level and insert the cross validation as its sub-process. Set&lt;br&gt;- SVM.C: Min-1e-3, max-1e2, Steps-5, Scale-Logarithmic&lt;br&gt;- Create Threshold.Threshold: Min-0.05, max-0.5, Steps-9, Scale-Linear&lt;br&gt;8. Add a Log operator after cross validation&lt;br&gt;9. Save this process as SVM Solution with Optimization&lt;br&gt;10. Run the model and review the results&lt;br&gt;</description>
+    </process>
+  </operator>
+</process>
